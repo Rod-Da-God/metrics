@@ -10,10 +10,10 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /districts-service
+WORKDIR /metrics
 
 COPY src/ ./src/
 
-ENV PYTHONPATH=/districts-service
+ENV PYTHONPATH=/metrics
 
 CMD ["python", "src/main.py"]

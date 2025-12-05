@@ -14,9 +14,9 @@ from middleware import setup_middlewares
 from routers import setup_routers
 from utils.log_conf import setup_logging
 
-from database.core.connection import init_db
-from external.cache.cache import Cache
-from external.overpass.client import OverpassClient
+from lifecycle import startup, shutdown
+
+
 
 setup_logging()
 

@@ -5,16 +5,16 @@ import logging
 from typing import AsyncIterator
 
 from fastapi import FastAPI
+from database.core.connection import init_db
 
-from external.cache.cache import Cache
-from external.overpass.client import OverpassClient
+
 
 
 logger = logging.getLogger(__name__)
 
 
 async def startup() -> None:
-    pass
+    await init_db(use_create_all=False)
 
 
 async def shutdown() -> None:pass

@@ -1,6 +1,6 @@
 
-from .district_repository import DistrictRepository
+from .analytics_repository import AnalyticsRepository
 
 __all__ = [
-    "DistrictRepository"
+    "AnalyticsRepository"
 ]

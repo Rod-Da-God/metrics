@@ -1,13 +1,13 @@
 services:
   postgres:
-    image: postgis/postgis:16-3.4
-    container_name: postgres_billboard
+    image: postgres:16-alpine
+    container_name: postgres_metrics
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - "${DB_PORT}:5432"
+      - "${DB_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -19,63 +19,27 @@ services:
       timeout: 5s
       retries: 5
 
-
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: pgadmin_districts
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    ports:
-      - "5050:80"
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-    networks:
-      - backend-network
-    depends_on:
-      - postgres
-    restart: unless-stopped
-
   backend:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app_disctricts
+    container_name: metrics
     ports:
-      - "9000:${PORT}"
+      - "9000:${PORT:-8000}"
     env_file:
       - .env
     networks:
       - backend-network
     depends_on:
-      redis:
-        condition: service_healthy
       postgres:
         condition: service_healthy
-
-
     restart: unless-stopped
 
-  redis:
-    image: redis:latest
-    container_name: redis_districts
-    volumes:
-      - redis_data:/data
-    networks:
-      - backend-network
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-    restart: unless-stopped
+
 
 
 volumes:
-  redis_data:
   postgres_data:
-  pgadmin_data:
 
 networks:
   backend-network:
