@@ -28,7 +28,10 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-    await startup()
+    try:
+        await startup()
+    except Exception as e:
+        logger.error("Database health check failed: %s", e)
     yield
     await shutdown()
 

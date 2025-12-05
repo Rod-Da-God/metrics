@@ -118,12 +118,3 @@ class AnalyticsService:
                     e
                 )
     
-    @staticmethod
-    async def check_health() -> bool:
-        """
-        Проверяет health приложения (доступность БД).
-        
-        Returns:
-            True если все ок
-        """
-        return await AnalyticsRepository.check_database_health()

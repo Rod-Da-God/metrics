@@ -17,6 +17,7 @@ async def startup() -> None:
     await init_db(use_create_all=False)
 
 
+
 async def shutdown() -> None:pass
 
 
