@@ -13,12 +13,13 @@ from database.models.analytics_models import (
     DailyItemView,
     EventReject
 )
+from database.repository.postgre_repo import PostgreRepository
 
 
 logger = logging.getLogger(__name__)
 
 
-class AnalyticsRepository:
+class AnalyticsRepository(PostgreRepository[AnalyticsEvent]):
     """
     Репозиторий для работы с аналитическими событиями.
     
@@ -27,6 +28,7 @@ class AnalyticsRepository:
     - Дедупликацию просмотров в analytics.daily_item_views (upsert)
     - Логирование отклоненных событий в analytics.event_rejects
     """
+    model = AnalyticsEvent
     
     @classmethod
     @connection()

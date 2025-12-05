@@ -27,7 +27,6 @@ class AnalyticsEvent(Base):
         Index("ix_events_entity", "entity_type", "entity_id", "event_ts"),
         Index("ix_events_client_ts", "client_id", "event_ts"),
         Index("ix_events_session_ts", "session_id", "event_ts"),
-        {"schema": "analytics", "comment": "Сырые события пользователей"}
     )
 
     event_id: Mapped[UUID] = mapped_column(
@@ -127,7 +126,6 @@ class DailyItemView(Base):
         Index("ix_daily_views_date", "view_date"),
         Index("ix_daily_views_banner", "banner_id", "view_date"),
         Index("ix_daily_views_city_district", "city", "district", "view_date"),
-        {"schema": "analytics", "comment": "Уникальные дневные просмотры баннеров"}
     )
 
     banner_id: Mapped[int] = mapped_column(
@@ -181,7 +179,6 @@ class EventReject(Base):
     __table_args__ = (
         Index("ix_rejects_ts", "reject_ts"),
         Index("ix_rejects_event_name", "event_name"),
-        {"schema": "analytics", "comment": "Отклоненные события"}
     )
 
     reject_id: Mapped[int] = mapped_column(

@@ -10,7 +10,6 @@ from sqlalchemy.orm import (
 from sqlalchemy.sql import func
 
 
-# Аннотации для часто используемых полей
 id_field = Annotated[
     int, mapped_column(Integer, primary_key=True, autoincrement=True)
 ]

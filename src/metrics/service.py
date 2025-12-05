@@ -103,18 +103,11 @@ class AnalyticsService:
             rejected: Список кортежей (событие, причина отклонения)
         """
         for event, reason in rejected:
-            try:
-                await AnalyticsRepository.save_rejected_event(
-                    event_name=event.event_name,
-                    reason=reason,
-                    raw_event=event.model_dump(mode="json"),
-                    client_id=event.client_id,
-                    session_id=event.session_id
-                )
-            except Exception as e:
-                logger.error(
-                    "Не удалось сохранить rejected event: event_id=%s, error=%s",
-                    event.event_id,
-                    e
-                )
-    
+            await AnalyticsRepository.save_rejected_event(
+                event_name=event.event_name,
+                reason=reason,
+                raw_event=event.model_dump(mode="json"),
+                client_id=event.client_id,
+                session_id=event.session_id
+            )
+

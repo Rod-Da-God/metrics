@@ -33,7 +33,6 @@ class EventProperties(BaseModel):
     Валидацию делаем минимальную - фронт может присылать разные поля.
     """
     
-    # Общие поля
     source: str | None = Field(None, description="Источник (marker_click, short_card_button)")
     card_level: str | None = Field(None, description="Уровень карточки (short, full)")
     
@@ -64,7 +63,7 @@ class AnalyticsEventRequest(BaseModel):
     """
     
     event_id: UUID = Field(..., description="UUID события (генерируется на фронте)")
-    event_name: str = Field(..., description="Тип события")  # Убрал Literal - whitelist проверяем в service
+    event_name: str = Field(..., description="Тип события") 
     event_ts: datetime = Field(..., description="Timestamp от клиента (ISO-8601 UTC)")
     
     client_id: UUID = Field(..., description="UUID клиента из localStorage")

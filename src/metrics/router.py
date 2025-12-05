@@ -6,7 +6,7 @@ from pydantic import ValidationError
 from database.schemas.analytics_request import EventsBatchRequest
 from database.schemas.analytics_response import (
     EventsBatchResponse,
-    HealthCheckResponse
+    
 )
 from metrics.service import AnalyticsService
 
@@ -24,7 +24,7 @@ router = APIRouter(prefix="/analytics", tags=["Analytics"])
     description="""
     
     Поток обработки:
-    1. Валидация структуры (Pydantic)
+    1. Валидация структуры
     2. Проверка whitelist event_name
     3. Обогащение серверными данными (received_ts, viewer_id)
     4. Сохранение в analytics.events
@@ -67,11 +67,5 @@ async def receive_events(batch: EventsBatchRequest) -> EventsBatchResponse:
             detail=f"Validation error: {str(e)}"
         )
         
-    except Exception as e:
-        logger.exception("Ошибка обработки батча событий")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal server error: {str(e)}"
-        )
 
 
