@@ -1,0 +1,26 @@
+[tool.ruff]
+target-version = "py313"
+
+line-length = 79
+
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "__init__.py",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]  # PEP8, pyflakes, isort
+ignore = ["E501"]         # длинные строки (уже ограничены line-length)
+
+[tool.ruff.format]
+quote-style = "double"    # двойные кавычки
+indent-style = "space"    # пробелы вместо табов
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+lines-between-types = 0
+force-single-line = false
+force-sort-within-sections = true
+order-by-type = true
