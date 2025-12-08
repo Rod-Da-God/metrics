@@ -6,7 +6,6 @@ from database.schemas.analytics_request import AnalyticsEventRequest
 
 def enrich_event(event: AnalyticsEventRequest) -> Dict[str, Any]:
     """
-    Обогащает событие серверными данными согласно ТЗ (раздел 10.3).
     
     Обогащение:
     - received_ts (сервер)

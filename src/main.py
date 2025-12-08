@@ -10,7 +10,6 @@ from exc_handler import setup_exception_handlers
 from middleware import setup_middlewares
 from routers import setup_routers
 from utils.log_conf import setup_logging
-from database.core.connection import init_db
 
 
 setup_logging()
@@ -24,8 +23,6 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     """
     logger.info("Starting application...")
     
-    await init_db(use_create_all=True)
-    logger.info("Database connection established successfully")
     yield
     
 

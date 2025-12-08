@@ -12,9 +12,7 @@ from metrics.utils import (
     validate_event_whitelist
 )
 
-
 logger = logging.getLogger(__name__)
-
 
 class AnalyticsService:
     """
@@ -110,4 +108,3 @@ class AnalyticsService:
                 client_id=event.client_id,
                 session_id=event.session_id
             )
-
